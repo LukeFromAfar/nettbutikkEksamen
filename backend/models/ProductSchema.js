@@ -18,6 +18,10 @@ const productSchema = new Schema({
         type: String,
         required: true,
     },
+    category: {
+        type: String,
+        required: true,
+    },
 });
 
 const Product = model("Product", productSchema);

@@ -23,9 +23,17 @@ export default function Register() {
       },
       { withCredentials: true },
     ).then((res) => {
-      setMessage(res.data.message);
-      if(res.status == 202) {window.location.replace("/")}
-    }, 500);
+      setMessage(res.data.msg);
+      if (res.status === 201) {
+        window.location.replace("/sign-in");
+      }
+    }).catch((error) => {
+      if (error.response) {
+        setMessage(error.response.data.msg);
+      } else {
+        setMessage("An error occurred. Please try again.");
+      }
+    });
   }
 
   return (

@@ -3,7 +3,7 @@ require('dotenv').config();
 const User = require('../models/UserSchema');
 
 async function verifyJwt ( req, res, next ) {
-    const jsonwebtoken = req.cookies.jwt;
+    const jsonwebtoken = req.cookies ? req.cookies.jwt : null;
 
     if (jsonwebtoken) {
 
