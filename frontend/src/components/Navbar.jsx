@@ -7,7 +7,7 @@ export default function Navbar() {
   const isLoginPage = location.pathname === "/sign-in";
 
   return (
-    <nav className="flex w-full justify-between p-4 bg-blue-300">
+    <nav className="flex w-full justify-between p-4 bg-blue-300 fixed">
       <Link to="/">
         <img src={reactsvg} alt="Logo" className="w-8 h-8" />{" "}
       </Link>
