@@ -2,6 +2,9 @@ const User = require('../models/UserSchema'); // Assuming you have a User model
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
+const createJWT = require('../utils/createJWT');
+const createCookie = require('../utils/createCookie');
+
 const saltRounds = parseInt(process.env.SALT_ROUNDS);
 
 const authController = {
@@ -34,13 +37,18 @@ const authController = {
 
     register: async (req, res) => {
         try {
-            const { email, password } = req.body;
+            const { email, password, repeatPassword, username} = req.body;
+
+            if (password !== repeatPassword) {
+                return res.status(400).send({ msg: 'Passwords do not match' });
+            }
+
             let user = await User.findOne({ email });
             if (user) {
                 return res.status(400).send({ msg: 'User already exists' });
             }
 
-            user = new User({ email, password });
+            user = new User({ email, password, username });
             user.password = await bcrypt.hash(password, saltRounds);
             await user.save();
 
