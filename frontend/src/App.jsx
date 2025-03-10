@@ -4,6 +4,9 @@ import Home from "./pages/Home";
 import Login from "./pages/authentication/Login";
 import Register from "./pages/authentication/Register";
 import AddClothing from "./pages/AddClothing";
+import ProductDetail from "./pages/ProductDetail";
+import CategoryPage from "./pages/CategoryPage";
+import FaqPage from "./pages/FaqPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -13,6 +16,9 @@ function App() {
         <Route index element={<Home />} />
         <Route path="sign-in" element={<Login />} />
         <Route path="sign-up" element={<Register />} />
+        <Route path="product/:id" element={<ProductDetail />} />
+        <Route path="category/:category" element={<CategoryPage />} />
+        <Route path="faq" element={<FaqPage />} />
         <Route 
           path="add-clothing" 
           element={

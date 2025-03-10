@@ -27,7 +27,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="flex w-full justify-between p-4 bg-blue-300 fixed">
+    <nav className="flex w-full justify-between p-4 bg-blue-300 fixed z-50">
       <Link to="/">
         <img src={reactsvg} alt="Logo" className="w-8 h-8" />{" "}
       </Link>
@@ -38,7 +38,7 @@ export default function Navbar() {
         {user && user.role === "admin" && (
           <button
             onClick={() => navigate("/add-clothing")}
-            className="bg-green-500 text-white py-1 px-3 rounded hover:bg-green-600"
+            className="bg-green-500 text-white py-1 px-3 rounded hover:bg-green-600 cursor-pointer"
           >
             Add Clothing
           </button>
@@ -46,14 +46,14 @@ export default function Navbar() {
         {user ? (
           <button
             onClick={handleLogout}
-            className="text-btn btn-primary hover:text-blue-700"
+            className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 cursor-pointer"
           >
             Logout
           </button>
         ) : (
           <Link
             to={isLoginPage ? "/sign-up" : "/sign-in"}
-            className="text-btn btn-primary hover:text-blue-700"
+            className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600 cursor-pointer"
           >
             {isLoginPage ? "Register" : "Login"}
           </Link>

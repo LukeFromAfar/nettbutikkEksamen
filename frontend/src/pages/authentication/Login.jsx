@@ -60,7 +60,7 @@ export default function Login() {
           </a>
         </p>
         <p className="mt-2 text-center text-sm">
-          <a href="/forgot-password" className="text-blue-500 hover:text-blue-700">
+          <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" className="text-blue-500 hover:text-blue-700">
             Forgot password?
           </a>
         </p>

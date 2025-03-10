@@ -1,3 +1,4 @@
+// backend/models/ProductSchema.js
 const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
@@ -22,7 +23,7 @@ const productSchema = new Schema({
         type: String,
         required: true,
     },
-});
+}, { timestamps: true }); // This adds createdAt and updatedAt fields automatically
 
 const Product = model("Product", productSchema);
 

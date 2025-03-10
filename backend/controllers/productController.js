@@ -55,6 +55,35 @@ const productController = {
             console.log(error);
             res.status(500).send({ msg: 'Error fetching product' });
         }
+    },
+
+    deleteProduct: async (req, res) => {
+        try {
+            const productId = req.params.id;
+            
+            // Find the product to get the image path
+            const product = await Product.findById(productId);
+            
+            if (!product) {
+                return res.status(404).send({ msg: 'Product not found' });
+            }
+            
+            // Delete the image file if it exists
+            if (product.image) {
+                const imagePath = path.join(__dirname, '..', product.image);
+                if (fs.existsSync(imagePath)) {
+                    fs.unlinkSync(imagePath);
+                }
+            }
+            
+            // Delete the product from the database
+            await Product.findByIdAndDelete(productId);
+            
+            res.status(200).send({ msg: 'Product deleted successfully' });
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({ msg: 'Error deleting product' });
+        }
     }
 };
 
