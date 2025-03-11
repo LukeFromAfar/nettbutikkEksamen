@@ -1,6 +1,8 @@
+// frontend/src/pages/authentication/Login.jsx
 import { useContext, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../../hooks/authContext";
+import { Link } from "react-router-dom"; // Add this import
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -55,14 +57,14 @@ export default function Login() {
         {message && <div className="mt-4 text-center text-red-500">{message}</div>}
         <p className="mt-4 text-center text-sm">
           Don't have an account?{" "}
-          <a href="/sign-up" className="text-blue-500 hover:text-blue-700">
+          <Link to="/sign-up" className="text-blue-500 hover:text-blue-700">
             Register
-          </a>
+          </Link>
         </p>
         <p className="mt-2 text-center text-sm">
-          <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" className="text-blue-500 hover:text-blue-700">
+          <Link to="/forgot-password" className="text-blue-500 hover:text-blue-700">
             Forgot password?
-          </a>
+          </Link>
         </p>
       </div>
     </div>

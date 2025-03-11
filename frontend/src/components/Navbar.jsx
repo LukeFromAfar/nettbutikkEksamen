@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../hooks/authContext";
 import axios from "axios";
+import CartIcon from "./CartIcon";
 
 export default function Navbar() {
   const location = useLocation();
@@ -27,7 +28,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="flex w-full justify-between p-4 bg-blue-300 fixed z-50">
+    <nav className="flex w-full justify-between p-4 bg-blue-300 fixed">
       <Link to="/">
         <img src={reactsvg} alt="Logo" className="w-8 h-8" />{" "}
       </Link>
@@ -35,6 +36,8 @@ export default function Navbar() {
         [Nettbutikk] {user && `- ${user.username}`}
       </h1>
       <div className="flex items-center gap-4">
+        <CartIcon />
+        
         {user && user.role === "admin" && (
           <button
             onClick={() => navigate("/add-clothing")}

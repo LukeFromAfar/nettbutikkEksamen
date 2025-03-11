@@ -1,14 +1,19 @@
+// src/pages/ProductDetail.jsx
 import { useState, useEffect, useContext } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../hooks/authContext";
+import { CartContext } from "../hooks/cartContext";
+import { Minus, Plus } from "lucide-react";
 
 export default function ProductDetail() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [quantity, setQuantity] = useState(1);
   const { user } = useContext(AuthContext);
+  const { addToCart } = useContext(CartContext);
   const navigate = useNavigate();
   const isAdmin = user && user.role === "admin";
 
@@ -46,6 +51,18 @@ export default function ProductDetail() {
     }
   };
 
+  const handleQuantityChange = (value) => {
+    const newQuantity = quantity + value;
+    if (newQuantity >= 1) {
+      setQuantity(newQuantity);
+    }
+  };
+
+  const handleAddToCart = () => {
+    addToCart(product, quantity);
+    alert(`${quantity} ${product.name}(s) added to cart!`);
+  };
+
   if (loading) return <div className="pt-20 text-center">Loading product details...</div>;
   if (error) return <div className="pt-20 text-center text-red-500">{error}</div>;
   if (!product) return <div className="pt-20 text-center">Product not found</div>;
@@ -75,6 +92,35 @@ export default function ProductDetail() {
             <h2 className="text-xl font-semibold mb-2">Description</h2>
             <p className="text-gray-700">{product.description}</p>
           </div>
+
+          {/* Quantity Selector */}
+          <div className="flex items-center mb-6">
+            <span className="mr-4">Quantity:</span>
+            <div className="flex items-center border rounded">
+              <button 
+                onClick={() => handleQuantityChange(-1)}
+                className="px-3 py-1 border-r hover:bg-gray-100"
+                disabled={quantity <= 1}
+              >
+                <Minus size={16} />
+              </button>
+              <span className="px-4 py-1">{quantity}</span>
+              <button 
+                onClick={() => handleQuantityChange(1)}
+                className="px-3 py-1 border-l hover:bg-gray-100"
+              >
+                <Plus size={16} />
+              </button>
+            </div>
+          </div>
+
+          {/* Add to Cart Button */}
+          <button
+            onClick={handleAddToCart}
+            className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-md mr-4"
+          >
+            Add to Cart
+          </button>
           
           {/* Admin Buttons */}
           {isAdmin && (

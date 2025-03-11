@@ -1,3 +1,4 @@
+// backend/models/UserSchema.js
 const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
@@ -19,7 +20,13 @@ const userSchema = new Schema({
     type: String,
     default: "user",
   },
-});
+  resetPasswordToken: {
+    type: String,
+  },
+  resetPasswordExpires: {
+    type: Date
+  }
+}, { timestamps: true });
 
 const User = model("User", userSchema);
 

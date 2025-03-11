@@ -4,10 +4,13 @@ import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import Login from "./pages/authentication/Login";
 import Register from "./pages/authentication/Register";
+import ForgotPassword from "./pages/authentication/ForgotPassword";
+import ResetPassword from "./pages/authentication/ResetPassword";
 import AddClothing from "./pages/AddClothing";
 import EditClothing from "./pages/EditClothing";
 import ProductDetail from "./pages/ProductDetail";
 import CategoryPage from "./pages/CategoryPage";
+import CartPage from "./pages/CartPage";
 import FaqPage from "./pages/FaqPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -18,8 +21,11 @@ function App() {
         <Route index element={<Home />} />
         <Route path="sign-in" element={<Login />} />
         <Route path="sign-up" element={<Register />} />
+        <Route path="forgot-password" element={<ForgotPassword />} />
+        <Route path="reset-password/:token" element={<ResetPassword />} />
         <Route path="product/:id" element={<ProductDetail />} />
         <Route path="category/:category" element={<CategoryPage />} />
+        <Route path="cart" element={<CartPage />} />
         <Route path="faq" element={<FaqPage />} />
         <Route 
           path="add-clothing" 
