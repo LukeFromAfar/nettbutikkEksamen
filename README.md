@@ -124,6 +124,13 @@ npm start
 - Add new products using the "Add Clothing" button in the navbar
 - Delete products from the product detail page using the delete button
 
+### Resetting password
+- Go to https://ethereal.email/create
+- Press Login
+- Use the username: jeff.konopelski49@ethereal.email
+- Use the password: 2KxgqpmfrGvEb8P36N
+- Go to messages to see verification email and press the link in the mail
+
 ## License
 This project is licensed under the MIT License.
 
