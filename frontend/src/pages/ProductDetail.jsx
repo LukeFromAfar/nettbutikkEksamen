@@ -76,14 +76,22 @@ export default function ProductDetail() {
             <p className="text-gray-700">{product.description}</p>
           </div>
           
-          {/* Admin Delete Button */}
+          {/* Admin Buttons */}
           {isAdmin && (
-            <button
-              onClick={handleDelete}
-              className="mt-4 bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md transition-colors"
-            >
-              DELETE
-            </button>
+            <div className="flex gap-4 mt-4">
+              <Link
+                to={`/edit-clothing/${product._id}`}
+                className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors"
+              >
+                EDIT
+              </Link>
+              <button
+                onClick={handleDelete}
+                className="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-md transition-colors"
+              >
+                DELETE
+              </button>
+            </div>
           )}
         </div>
       </div>

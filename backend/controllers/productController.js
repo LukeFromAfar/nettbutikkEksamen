@@ -57,6 +57,50 @@ const productController = {
         }
     },
 
+    updateProduct: async (req, res) => {
+        try {
+            const productId = req.params.id;
+            const { price, description, category } = req.body;
+            
+            // Find the product
+            const product = await Product.findById(productId);
+            
+            if (!product) {
+                return res.status(404).send({ msg: 'Product not found' });
+            }
+            
+            // Update fields
+            product.price = price;
+            product.description = description;
+            product.category = category;
+            
+            // Handle image update if new image is uploaded
+            if (req.files && req.files.image) {
+                // Delete old image if it exists
+                if (product.image) {
+                    const oldImagePath = path.join(__dirname, '..', product.image);
+                    if (fs.existsSync(oldImagePath)) {
+                        fs.unlinkSync(oldImagePath);
+                    }
+                }
+                
+                // Save new image
+                const imageFile = req.files.image;
+                const filename = Date.now() + path.extname(imageFile.name);
+                const uploadPath = path.join(__dirname, '../uploads/' + filename);
+                
+                await imageFile.mv(uploadPath);
+                product.image = `/uploads/${filename}`;
+            }
+            
+            await product.save();
+            res.status(200).send({ msg: 'Product updated successfully', product });
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({ msg: 'Error updating product' });
+        }
+    },
+
     deleteProduct: async (req, res) => {
         try {
             const productId = req.params.id;

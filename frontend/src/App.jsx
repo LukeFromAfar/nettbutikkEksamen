@@ -1,9 +1,11 @@
+// src/App.jsx
 import { Routes, Route } from "react-router-dom";
 import Layout from "./pages/Layout";
 import Home from "./pages/Home";
 import Login from "./pages/authentication/Login";
 import Register from "./pages/authentication/Register";
 import AddClothing from "./pages/AddClothing";
+import EditClothing from "./pages/EditClothing";
 import ProductDetail from "./pages/ProductDetail";
 import CategoryPage from "./pages/CategoryPage";
 import FaqPage from "./pages/FaqPage";
@@ -24,6 +26,14 @@ function App() {
           element={
             <ProtectedRoute requiredRole="admin">
               <AddClothing />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="edit-clothing/:id" 
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <EditClothing />
             </ProtectedRoute>
           } 
         />
